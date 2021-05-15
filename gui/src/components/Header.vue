@@ -11,6 +11,7 @@
     </nav>
     <div class="hdr_user_control">
       <router-link to="/auth" class="standart">Авторизация</router-link>
+      <router-link to="/regist" class="standart">Регистрация</router-link>
     </div>
   </header>
 </template>

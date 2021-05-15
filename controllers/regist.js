@@ -1,9 +1,6 @@
 const regist = async (req, res) => {
   try {
-    if (req == "benis") {
-      throw new Error("hehe u pooped");
-    }
-    console.log("123");
+    console.log(req);
     res = {
       status: true,
       message: "horosho",
