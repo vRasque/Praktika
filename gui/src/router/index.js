@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Home from '../views/Home.vue';
+import About from '../views/About.vue';
 import Regist from '../views/Regist.vue';
 import Auth from '../views/Auth.vue';
 import Edu from '../views/Edu.vue';
@@ -13,6 +14,11 @@ const routes = [
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
   },
   {
     path: '/regist',

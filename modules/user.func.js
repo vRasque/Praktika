@@ -30,6 +30,14 @@ const getServerUser = async (data, res) => {
   return await res;
 }
 
+const getUserInfo = async (data, res) => {
+  const user_raw = await User.findByPk(data);
+  res = {
+    username: user_raw.username
+  }
+  return await res;
+}
+
 const checkHash = (pass, hash) => {
   return bcrypt.compareSync(pass, hash);
 }
@@ -38,11 +46,21 @@ const genToken = (data) => {
   let token = jwt.sign({id: data}, config.key);
   return token;
 };
+function verifyToken(data) {
+  console.log(data);
+}
+// const verifyToken = async (data) => {
+//   // let token = jwt.verify(data, config.key);
+//   // return token;
+//   console.log(data);
+// };
 
-module.exports = { 
+module.exports = {
   addUser,
   getServerUser,
   checkHash,
   checkUser,
   genToken,
+  getUserInfo,
+  verifyToken
 }

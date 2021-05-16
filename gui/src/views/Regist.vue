@@ -1,12 +1,14 @@
 <template>
   <main>
-    <h1>Регистрация</h1>
-    <div class="form">
-      <input type="text" v-model="user_data.username">
-      <input type="password" v-model="user_data.pass">
+    <div class="form_page">
+      <h1>Регистрация</h1>
+      <div class="form">
+        <input type="text" v-model="user_data.username" class="standart">
+        <input type="password" v-model="user_data.pass" class="standart">
+      </div>
+      <p class="error_msg" v-if="regist_error">{{regist_error}}</p>
+      <a class="standart" v-on:click="regist()">Отправить</a>
     </div>
-    <p class="error_msg" v-if="regist_error">{{regist_error}}</p>
-    <a class="standart" v-on:click="regist()">Отправить</a>
   </main>
 </template>
 
@@ -38,11 +40,14 @@
           if (json.status == false) {
             this.regist_error = json.message;
           } else {
-            localStorage.setItem('token', json.token);
+            this.$store.commit('setToken', json.token);
             this.$router.push('/');
           }
         });
         }
     },
+    metaInfo: {
+      title: "Авторизация",
+    }
   };
 </script>

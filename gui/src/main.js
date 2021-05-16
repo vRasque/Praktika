@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+import VueMeta from "vue-meta";
 import router from './router';
 import store from './store';
 
@@ -12,6 +13,7 @@ import Footer from './components/Footer.vue';
 // Инициализация компонентов
 Vue.component('tmpheader', Header);
 Vue.component('tmpfooter', Footer);
+Vue.use(VueMeta);
 
 new Vue({
   router,
