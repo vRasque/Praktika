@@ -1,12 +1,12 @@
 <template>
   <main>
-    <h1>Регистрация</h1>
+    <h1>Авторизация</h1>
     <div class="form">
       <input type="text" v-model="user_data.username">
       <input type="password" v-model="user_data.pass">
     </div>
-    <p class="error_msg" v-if="regist_error">{{regist_error}}</p>
-    <a class="standart" v-on:click="regist()">Отправить</a>
+    <p class="error_msg" v-if="auth_error">{{auth_error}}</p>
+    <a class="standart" v-on:click="auth()">Отправить</a>
   </main>
 </template>
 
@@ -18,12 +18,12 @@
           username: '',
           pass: '',
         },
-        regist_error: '',
+        auth_error: '',
       }
     },
     methods: {
-      regist (){
-        fetch('http://localhost:3000/regist', {
+      auth (){
+        fetch('http://localhost:3000/auth', {
           headers: {
             'Content-Type': 'application/json'
           },
@@ -36,9 +36,9 @@
         .then((json) => {
           console.log(json);
           if (json.status == false) {
-            this.regist_error = json.message;
+            this.auth_error = json.message;
           } else {
-            localStorage.setItem('token', json.token);
+            this.$store.commit("setToken", json.token);
             this.$router.push('/');
           }
         });
