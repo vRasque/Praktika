@@ -15,7 +15,7 @@
       <router-link to="/regist" class="standart">Регистрация</router-link>
     </div>
     <div class="hdr_user_control" v-else>
-      Иван Иванов
+      {{ $store.getters.getUserName }}
       <a class="standart" v-on:click="$store.commit('deleteToken')">Выйти</a>
     </div>
   </header>

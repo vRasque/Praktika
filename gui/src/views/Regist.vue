@@ -36,11 +36,11 @@
           return res.json();
         })
         .then((json) => {
-          console.log(json);
           if (json.status == false) {
             this.regist_error = json.message;
           } else {
             this.$store.commit('setToken', json.token);
+            this.$store.dispatch('getUserName');
             this.$router.push('/');
           }
         });

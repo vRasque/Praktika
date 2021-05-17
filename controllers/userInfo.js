@@ -1,11 +1,11 @@
-const {getUserInfo} = require("../modules/user.func.js");
-const edu = (req, res) => {
+const { getUserInfo } = require("../modules/user.func.js");
+const edu = async (req, res) => {
   try {
+    let userinfo = await getUserInfo(req.user_id);
     res = {
       status: true,
-      userinfo: getUserInfo(req.user)
+      userinfo: userinfo
     }
-    console.log(res);
     return res;
   } catch (error) {
     res = {

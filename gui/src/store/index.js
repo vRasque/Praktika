@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import router from '../router';
 
 Vue.use(Vuex)
 
@@ -28,9 +29,10 @@ export default new Vuex.Store({
     deleteToken(state) {
       localStorage.removeItem('token');
       state.token = "";
+      router.push('/');
     },
     setUserName(state, res) {
-      state.eduResults = res;
+      state.username = res;
     },
     setEduResults(state, res) {
       state.eduResults = res;
@@ -49,7 +51,12 @@ export default new Vuex.Store({
         return res.json();
       })
       .then((json) => {
-        commit('setEduResults', json)
+        if (json.status == 401) {
+          commit('deleteToken');
+          router.push('/');
+        } else {
+          commit('setEduResults', json);
+        }
       });
     },
     getUserName ({state,commit}) {
@@ -64,8 +71,7 @@ export default new Vuex.Store({
         return res.json();
       })
       .then((json) => {
-        console.log(json);
-        commit('setUserName', json.username);
+        commit('setUserName', json.userinfo.username);
       });
     }
   }

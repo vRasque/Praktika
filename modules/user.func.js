@@ -13,16 +13,14 @@ const checkUser = async (data, res) => {
   }
 };
 
-const addUser = async (data) => {
+const addUser = async (data, res) => {
   const saltRounds = 10;
   const hash = bcrypt.hashSync(data.pass, saltRounds);
-  console.log(hash, data);
-  User.create({
+  var user = await User.create({
     username: data.username,
     password: hash,
-  }).then(res=>{
-    console.log(res);
-  }).catch(err=>console.log(err));
+  })
+  return user.id;
 }
 
 const getServerUser = async (data, res) => {
@@ -46,14 +44,17 @@ const genToken = (data) => {
   let token = jwt.sign({id: data}, config.key);
   return token;
 };
-function verifyToken(data) {
-  console.log(data);
+const verifyToken = async (req,res,next) => {
+  const token = req.headers['token'];
+  try {
+    if (!token) throw new Error('Требуется авторизация');
+    user = jwt.verify(token, config.key);
+    req.user_id = user.id;
+    next();
+  } catch(err) {
+    res.json({status: 401, message: 'Требуется авторизация'});
+  }
 }
-// const verifyToken = async (data) => {
-//   // let token = jwt.verify(data, config.key);
-//   // return token;
-//   console.log(data);
-// };
 
 module.exports = {
   addUser,

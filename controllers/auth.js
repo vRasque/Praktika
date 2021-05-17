@@ -14,7 +14,6 @@ const auth = async (req, res) => {
     if (checkHash(pass, userData.password) == false) {
       throw new Error("Неверный логин или пароль");
     }
-    console.log(userData);
     let token = genToken(userData.id);
     res = {
       status: true,

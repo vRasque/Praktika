@@ -9,7 +9,7 @@ const edu = require('./controllers/edu');
 // -- Controllers END
 
 // Auth handler
-let verifyToken = require('./modules/user.func.js');
+let {verifyToken} = require('./modules/user.func.js');
 
 // -- Rotes START
 const app = express();
@@ -21,17 +21,10 @@ app.post('/regist', async (req, res) => {
 app.post('/auth', async (req, res) => {
   res.json(await auth(req.body));
 });
-verifyToken('234243');
-app.use('/userinfo', (req, res, next) => {
-  let status = verifyToken(req.headers['token']);
-  console.log(status);
-  next();
+app.post('/userinfo', verifyToken, async (req, res) => {
+  res.json(await userInfo(req));
 });
-
-app.post('/userinfo', async (req, res) => {
-  res.json(userInfo(req));
-});
-app.post('/edu', async (req, res) => {
+app.post('/edu', verifyToken, async (req, res) => {
   res.json(edu(req));
 });
 // -- Rotes END
