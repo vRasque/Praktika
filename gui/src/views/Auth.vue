@@ -25,7 +25,7 @@
     },
     methods: {
       auth (){
-        fetch('http://localhost:3000/auth', {
+        fetch('https://ppet.divinity.tech:3000/auth', {
           headers: {
             'Content-Type': 'application/json'
           },

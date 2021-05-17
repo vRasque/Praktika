@@ -40,7 +40,7 @@ export default new Vuex.Store({
   },
   actions: {
     eduAction ({state,commit}) {
-      fetch('http://localhost:3000/edu', {
+      fetch('https://ppet.divinity.tech:3000/edu', {
         headers: {
           'Content-Type': 'application/json',
           'token': state.token
@@ -60,7 +60,7 @@ export default new Vuex.Store({
       });
     },
     getUserName ({state,commit}) {
-      fetch('http://localhost:3000/userinfo', {
+      fetch('https://ppet.divinity.tech:3000/userinfo', {
         headers: {
           'Content-Type': 'application/json',
           'token': state.token

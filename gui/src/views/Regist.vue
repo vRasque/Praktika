@@ -25,7 +25,7 @@
     },
     methods: {
       regist (){
-        fetch('http://localhost:3000/regist', {
+        fetch('https://ppet.divinity.tech:3000/regist', {
           headers: {
             'Content-Type': 'application/json'
           },
